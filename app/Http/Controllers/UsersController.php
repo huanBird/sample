@@ -25,7 +25,9 @@ class UsersController extends Controller
     }
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        //展示用户微博
+        $statuses = $user->statuses()->orderBy('created_at','desc')->paginate(15);
+        return view('users.show', compact('user','statuses'));
     }
     public function store(Request $request)
     {
